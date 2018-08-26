@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -e
+
+self=$(python -c 'import os,sys;print(os.path.realpath(sys.argv[1]))' "${BASH_SOURCE[0]}")
+here=$(dirname "$self")
+
+input=${1:?input}
+if [[ $input != *.epub ]]; then
+	echo "epub expected"
+	exit 1
+fi
+
+output=${input%.epub}_clean.epub
+
+CALIBRE_OVERRIDE_LANG=C \
+ebook-convert "$input" "$output" \
+	--input-profile=default \
+	--output-profile=generic_eink_hd \
+	--base-font-size=12 \
+	--font-size-mapping=10,10,11,12,14,16,18,20 \
+	--change-justification=justify \
+	--filter-css=color \
+	--transform-css-rules="$here/safaribooks-clean-rules.txt"

@@ -1,0 +1,20 @@
+# scale images for hi-dpi e-ink (width)
+action: *
+query: ^\d+px$
+property: width
+match_type: matches
+action_data: 2
+
+# scale images for hi-dpi e-ink (height)
+action: *
+query: ^\d+px$
+property: height
+match_type: matches
+action_data: 2
+
+# drop width: 100%, it interacts with margins badly
+action: remove
+query: 100%
+property: width
+match_type: is
+action_data: 
