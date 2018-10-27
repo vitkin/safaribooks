@@ -11,6 +11,11 @@ if [[ $input != *.epub ]]; then
 	exit 1
 fi
 
+# PocketBook chokes on too many font-faces and ignores the ones Calibre embeds,
+# so we need to drop all of them first.
+sed -i -e 's/@font-face/-x-ignore-font-face/g' OEBPS/Styles/*.css
+zip -u "$input" OEBPS/Styles/*.css
+
 output=${input%.epub}_clean.epub
 
 CALIBRE_OVERRIDE_LANG=C \
