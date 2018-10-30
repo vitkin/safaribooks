@@ -55,7 +55,7 @@ Those will be copied to the folder you specify as ```-v /home/myself/mybooks:/ap
 As an example:
 
 ```shell
-$ docker run -it --rm -e EMAIL='your@email' -e PASSWORD='yourpassword' -e BOOKID='XXXXXXXXX' -v /home/myself/mybooks:/app/converted:Z safaribook:latest --kindle
+$ docker run -it --rm -e EMAIL='your@email' -e PASSWORD='yourpassword' -e BOOKID='XXXXXXXXX' -v /home/myself/mybooks:/app/converted:Z safaribooks:latest --kindle
 ```
 
 #### Program options:
