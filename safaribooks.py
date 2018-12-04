@@ -58,7 +58,7 @@ class Display:
         sys.excepthook = sys.__excepthook__
 
     def log(self, message):
-        self.logger.info(str(message))
+        self.logger.info(str(message).encode("utf-8", "replace"))
 
     def out(self, put):
         sys.stdout.write("\r" + " " * self.columns + "\r" + put + "\n")
@@ -417,7 +417,7 @@ class SafariBooks:
         return new_cred
 
     def do_login(self, email, password):
-        response = self.requests_provider(self.BASE_URL)
+        response = self.requests_provider(self.LOGIN_URL)
         if response == 0:
             self.display.exit("Login: unable to reach Safari Books Online. Try again...")
 
