@@ -1,5 +1,6 @@
 #!/bin/sh
 KINDLE="false"
+NO_KINDLE="--no-kindle"
 
 usage(){
   echo "docker run --it -rm -e EMAIL='my@email' -e PASSWORD='mypass' -e BOOKID='111' -v /my/books:/app/converted:Z <image> [--kindle]"
@@ -20,6 +21,7 @@ while [ "$1" != "" ]; do
             ;;
         -k | --kindle)
             KINDLE="true"
+            NO_KINDLE=""
             ;;
         *)
             echo "ERROR: unknown parameter \"${PARAM}\""
@@ -31,6 +33,7 @@ while [ "$1" != "" ]; do
 done
 
 python3 /app/safaribooks.py \
+  ${NO_KINDLE} \
   --cred "${EMAIL}:${PASSWORD}" \
   --no-cookies ${BOOKID} || exit 2
 mv Books/*/*.epub /app/converted/
